@@ -52,7 +52,9 @@ function Filme() {
             <strong>Avaliação: {filme.vote_average} / 10</strong>
 
             <div className='area-buttons'>
-                <button>Salvar</button>
+                <button>
+                    <a>Salvar</a>
+                </button>
                 <button>
                     <a hrf="#">
                         Trailer
