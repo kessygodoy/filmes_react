@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import './favoritos.css'
 import { Link, json } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function Favoritos() {
 
@@ -12,13 +13,14 @@ export default function Favoritos() {
         setFilmes(JSON.parse(minhaLista) || []);
     }, [])
 
-    function excluirFilme(id) {
+    function excluirFilme(id, title) {
         let filtroFilmes = filmes.filter((item) => {
             return (item.id !== id)
         })
 
         setFilmes(filtroFilmes);
         localStorage.setItem("@primeflix", JSON.stringify(filtroFilmes))
+        toast.success(`Filme ${title} removido com sucesso!`)
     }
 
     return (
@@ -34,7 +36,7 @@ export default function Favoritos() {
                             <span>{item.title}</span>
                             <div>
                                 <Link to={`/filme/${item.id}`}>Ver detalhes</Link>
-                                <button onClick={() => excluirFilme(item.id)}>Excluir</button>
+                                <button onClick={() => excluirFilme(item.id, item.title)}>Excluir</button>
                             </div>
                         </li>
                     )
